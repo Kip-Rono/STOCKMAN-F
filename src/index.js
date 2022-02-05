@@ -6,14 +6,12 @@ import Login from "./pages/login/Login";
 import App from "./App";
 
 if (
-    localStorage.getItem("username") !== null ||
-    localStorage.getItem("fullnames") !== null
+    localStorage.getItem("name") !== null
 ) {
     ReactDOM.render(
         <BrowserRouter>
             <App
-                username={localStorage.getItem("username")}
-                fullnames={localStorage.getItem("fullname")}
+                name={localStorage.getItem("name")}
             />
         </BrowserRouter>,
         document.getElementById("root")

@@ -1,11 +1,16 @@
-import { Route, Switch } from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import Dashboard from "../../pages/Dashboard";
 
 const PageRoutes = () => {
     return (
-        <div>
-
-    </div>
+        <div className="content-wrapper">
+            <Switch>
+                {/* Dashboard */}
+                <Route path="/" exact>
+                    <Dashboard />
+                </Route>
+            </Switch>
+        </div>
     );
 }
 

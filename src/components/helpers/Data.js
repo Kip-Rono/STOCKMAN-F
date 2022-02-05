@@ -13,7 +13,7 @@ export const postData = async (formData, route) => {
     return data;
   } else {
     // throw new Error(response.statusText);
-    return "Error while accessing data. Please contact the admin...";
+    return "Error while accessing data. Please contact the StockMan Admin ...";
   }
 };
 

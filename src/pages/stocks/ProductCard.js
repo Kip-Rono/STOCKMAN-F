@@ -16,6 +16,10 @@ const ProductCard = () => {
     const [newProductIds, setNewProductIds] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [message, setmessage] = useState([]);
+    const [calculations, setCalculations] = useState({
+        amount: 0.0,
+
+    });
 
     useEffect(() => {
         getData('fetch_departments').then((data) => {
@@ -28,6 +32,20 @@ const ProductCard = () => {
             setSuppliers(data)
         });
     }, [])
+
+    useEffect(() => {
+        let amt = 0.0;
+
+        const tbl = document.querySelector("#tableId tbody").children;
+        for (let trs of tbl) {
+            const quantity = trs.children[1].children[0].value;
+            const unit_price = trs.children[2].children[0].value;
+
+            const total_amt = parseFloat(quantity) * parseFloat(unit_price);
+
+            trs.children[3].children[0].value = total_amt;
+        }
+    }, [calculations]);
 
     // useEffect((props) => {
     //
@@ -76,9 +94,21 @@ const ProductCard = () => {
                                        name={"category[]"}/>
                             </td>
                             <td className={"text-center"}>
-                                <input className={"form-control"} value={data.quantity}
-                                       name={"quantity[]"}/>
+                                <input className={"form-control"} defaultValue={data.quantity}
+                                       type={"number"} name={"quantity[]"}
+                                       onChange={(e) =>
+                                           setCalculations({ ...calculations, quantity: e.target.value })
+                                       }/>
                             </td>
+                            <td className={"text-center"}>
+                                <input className={"form-control"} value={data.unit_price}
+                                       type={"number"} name={"unit_price[]"}/>
+                            </td>
+                            <td className={"text-center"}>
+                                <input className={"form-control"} value={data.amount}
+                                       type={"number"} name={"amount[]"}/>
+                            </td>
+
                         </>
                     )
                 })
@@ -190,6 +220,8 @@ const ProductCard = () => {
                                         <tr>
                                             <th>Product_Id</th>
                                             <th>Quantity</th>
+                                            <th>Unit Price</th>
+                                            <th>Amount</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -201,8 +233,19 @@ const ProductCard = () => {
                                                                name={"category[]"}/>
                                                     </td>
                                                     <td className={"text-center"}>
-                                                        <input className={"form-control"} value={data.quantity}
-                                                               name={"quantity[]"}/>
+                                                        <input className={"form-control"} defaultValue={data.quantity}
+                                                               type={"number"} name={"quantity[]"}
+                                                               onChange={(e) =>
+                                                                   setCalculations({ ...calculations, quantity: e.target.value })
+                                                               }/>
+                                                    </td>
+                                                    <td className={"text-center"}>
+                                                        <input className={"form-control"} value={data.unit_price}
+                                                               type={"number"} name={"unit_price[]"}/>
+                                                    </td>
+                                                    <td className={"text-center"}>
+                                                        <input className={"form-control"} value={data.amount}
+                                                               type={"number"} name={"amount[]"}/>
                                                     </td>
                                                 </tr>
                                             )

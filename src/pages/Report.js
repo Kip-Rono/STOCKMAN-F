@@ -1,6 +1,6 @@
 import ReportCard from "../components/helpers/ReportCard";
 import {useState, useEffect} from 'react';
-import {getData} from "../components/helpers/Data";
+import {getData, getOneData} from "../components/helpers/Data";
 
 const Report = () => {
     const [reportsData, setReportsData] = useState([]);
@@ -10,24 +10,29 @@ const Report = () => {
         });
     }, []);
 
-    const generateDailyReport = () => {
-
+    const generateDailyReport = (e) => {
+        e.preventDefault();
+        const date = document.getElementById('date').value;
+        getOneData('generate_daily_report', date).then((data) => {
+            console.log(data);
+            setReportsData(data);
+        })
     }
     return (
         <div>
             <div className="row">
                 <ReportCard
-                    dt={reportsData.purchase_orders ? reportsData.purchase_orders.toLocaleString() : ""}
+                    dt={reportsData.purchase_amount ? reportsData.purchase_amount.toLocaleString() : ""}
                     color="lightblue" name="P. ORDERS"
                     icon={<i className="fas fa-hand-holding"></i>}/>
                 <ReportCard
                     dt={reportsData.sales ? reportsData.sales.toLocaleString() : ""}
-                    color="lightgreen" name="SALES"
-                    icon={<i class="fas fa-hand-holding-usd"></i>}/>
-                <ReportCard
-                    dt={reportsData.sales_amount ? reportsData.sales_amount.toLocaleString() : ""}
-                    color="lightgrey" name="SALES AMOUNT"
+                    color="lightgreen" name="SALES" type={"number"}
                     icon={<i class="fas fa-money-bill"></i>}/>
+                <ReportCard
+                    dt={reportsData.profit ? reportsData.profit.toLocaleString() : ""}
+                    color="lightgrey" name="PROFIT"
+                    icon={<i class="fas fa-hand-holding-usd "></i>}/>
             </div>
             <div className="row">
                 <ReportCard
@@ -44,7 +49,10 @@ const Report = () => {
                     icon={<i className="fas fa-users"></i>}/>
             </div>
             <div className={"row"}>
-                <button className={"btn btn-outline-primary btn-sm col-md-3"}
+                <label htmlFor={"date"} className={"col-form-label col-md-1 label-right"}>On: </label>
+                <input type={"date"} name={"date"} id={"date"} maxLength={"4"}
+                       max={"9999-12-31"} className={"form-control col-md-2 m-0"}/>
+                <button className={"btn btn-outline-primary btn-sm col-md-3 ml-1"}
                 onClick={generateDailyReport}>
                     Generate Daily Report
                 </button>

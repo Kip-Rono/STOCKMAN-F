@@ -4,12 +4,13 @@ import ProductCard from "../../pages/stocks/ProductCard";
 import CheckoutProducts from "../../pages/stocks/CheckoutProducts";
 import Report from "../../pages/Report";
 import Dashboard from "../../pages/Dashboard";
+import Login from "../../pages/login/Login";
 
 const PageRoutes = () => {
     return (
         <div className="container-fluid" id="content" style={{marginTop:"80px"}}>
             <Switch>
-                {/* Report */}
+                {/* Dashboard */}
                 <Route path="/" exact>
                     <Dashboard/>
                 </Route>

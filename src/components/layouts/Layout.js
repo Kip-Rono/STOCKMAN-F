@@ -7,9 +7,9 @@ const Layout = () => {
     const logout = () => {
         if (typeof Storage !== "undefined") {
             localStorage.removeItem("name");
-            ReactDOM.render(<Login/>, document.getElementById("root"));
+            ReactDOM.render(<Login />, document.getElementById("root"));
         } else {
-            console.log("could not save user data in local storage");
+            console.log("Could not save user data in local storage");
         }
     };
     return (

@@ -34,6 +34,36 @@ const Report = () => {
                     color="lightgrey" name="PROFIT"
                     icon={<i class="fas fa-hand-holding-usd "></i>}/>
             </div>
+            {/*food*/}
+            <div className="row">
+                <ReportCard
+                    dt={reportsData.clothes_purchase_amount ? reportsData.clothes_purchase_amount.toLocaleString() : ""}
+                    color="lightblue" name="CLOTHE P. ORDERS"
+                    icon={<i className="fas fa-hand-holding"></i>}/>
+                <ReportCard
+                    dt={reportsData.clothes_sales ? reportsData.clothes_sales.toLocaleString() : ""}
+                    color="lightgreen" name="CLOTHE SALES" type={"number"}
+                    icon={<i className="fas fa-money-bill"></i>}/>
+                <ReportCard
+                    dt={reportsData.clothes_profit ? reportsData.clothes_profit.toLocaleString() : ""}
+                    color="lightgrey" name=" CLOTHE PROFIT"
+                    icon={<i className="fas fa-hand-holding-usd "></i>}/>
+            </div>
+            {/*food*/}
+            <div className="row">
+                <ReportCard
+                    dt={reportsData.food_purchase_amount ? reportsData.food_purchase_amount.toLocaleString() : ""}
+                    color="lightblue" name="FOOD P. ORDERS"
+                    icon={<i className="fas fa-hand-holding"></i>}/>
+                <ReportCard
+                    dt={reportsData.food_sales ? reportsData.food_sales.toLocaleString() : ""}
+                    color="lightgreen" name="FOOD SALES" type={"number"}
+                    icon={<i className="fas fa-money-bill"></i>}/>
+                <ReportCard
+                    dt={reportsData.food_profit ? reportsData.food_profit.toLocaleString() : ""}
+                    color="lightgrey" name="FOOD PROFIT"
+                    icon={<i className="fas fa-hand-holding-usd "></i>}/>
+            </div>
             <div className="row">
                 <ReportCard
                     dt={reportsData.suppliers ? reportsData.suppliers.toLocaleString() : ""}

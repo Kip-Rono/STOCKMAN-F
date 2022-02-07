@@ -6,6 +6,8 @@ const CheckoutProducts = () => {
     const [category, setCategory] = useState([])
     const [sizesData, setSizesData] = useState([])
     const [suppliers, setSuppliers] = useState([])
+    const [foodTypes, setFoodTypes] = useState([])
+    const [foodSuppliers, setFoodSuppliers] = useState([])
     const [productIds, setProductIds] = useState([])
     const [newProductIds, setNewProductIds] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -13,6 +15,9 @@ const CheckoutProducts = () => {
     const [calculations, setCalculations] = useState({
         amount: 0.0,
 
+    });
+    const [hidden, setHidden] = useState({
+        clothes: false, food: true,
     });
 
 
@@ -23,8 +28,17 @@ const CheckoutProducts = () => {
         getData('fetch_sizes').then((data) => {
             setSizesData(data)
         });
+        getData('fetch_food_types').then((data) => {
+            setFoodTypes(data)
+        });
         getData('fetch_suppliers').then((data) => {
             setSuppliers(data)
+        });
+        getData('fetch_suppliers').then((data) => {
+            setSuppliers(data)
+        });
+        getData('fetch_food_suppliers').then((data) => {
+            setFoodSuppliers(data)
         });
     }, [])
 
@@ -41,6 +55,20 @@ const CheckoutProducts = () => {
             trs.children[3].children[0].value = total_amt;
         }
         }, [calculations]);
+    const selectedOption = () => {
+        const option = document.getElementById('category').value;
+        switch (option){
+            case '1':
+                setHidden({clothes: false, food: true})
+                break;
+            case '2':
+                setHidden({clothes: true, food: false})
+                break;
+            default:
+                break;
+        }
+    }
+
     const removeStock = (e) => {
         e.preventDefault();
         const frmData = new FormData(document.getElementById('stock_inventory_form'))
@@ -55,6 +83,10 @@ const CheckoutProducts = () => {
                 const rowData = data.response.map((data) => {
                     return (
                         <>
+                            <td className={"text-center"}>
+                                <input className={"form-control"} value={data.department}
+                                       name={"department[]"}/>
+                            </td>
                             <td className={"text-center"}>
                                 <input className={"form-control"} value={data.category}
                                        name={"category[]"}/>
@@ -124,7 +156,8 @@ const CheckoutProducts = () => {
                                            className="col-form-label col-md-2 label-right pr-3 pl-3">Category:
                                     </label>
                                     <div className={"col-md-4"}>
-                                        <select className={"form-control"} id={"category"} name={"category"}>
+                                        <select className={"form-control"} id={"category"} name={"category"}
+                                                onChange={selectedOption}>
                                             <option>-- Select Category--</option>
                                             {category.map((data) => {
                                                 return (
@@ -135,19 +168,41 @@ const CheckoutProducts = () => {
                                     </div>
                                 </div>
                                 <div className={"row justify-content-center mt-2"}>
-                                    <label htmlFor={"size"}
-                                           className="col-form-label col-md-2 label-right pr-3 pl-3">Size:
-                                    </label>
-                                    <div className={"col-md-4"}>
-                                        <select className={"form-control"} id={"size"} name={"size"}
-                                        >
-                                            <option>-- Select Size--</option>
-                                            {sizesData.map((data) => {
-                                                return (
-                                                    <option value={data.code}>{data.size}</option>
-                                                )
-                                            })}
-                                        </select>
+                                    <div className={"col-md-12"} hidden={hidden.clothes}>
+                                        <div className={"row justify-content-center"}>
+                                            <label htmlFor={"size"}
+                                                   className="col-form-label col-md-2 label-right pr-3 pl-3">Size:
+                                            </label>
+                                            <div className={"col-md-4"}>
+                                                <select className={"form-control"} id={"size"} name={"size"}
+                                                >
+                                                    <option>-- Select Cloth Size--</option>
+                                                    {sizesData.map((data) => {
+                                                        return (
+                                                            <option value={data.code}>{data.size}</option>
+                                                        )
+                                                    })}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={"col-md-12"} hidden={hidden.food}>
+                                        <div className={"row justify-content-center"}>
+                                            <label htmlFor={"type"}
+                                                   className="col-form-label col-md-2 label-right pr-3 pl-3">Food:
+                                            </label>
+                                            <div className={"col-md-4"}>
+                                                <select className={"form-control"} id={"type"} name={"type"}
+                                                >
+                                                    <option>-- Select Food Type --</option>
+                                                    {foodTypes.map((data) => {
+                                                        return (
+                                                            <option value={data.code}>{data.type}</option>
+                                                        )
+                                                    })}
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className={"row justify-content-center mt-2"}>
@@ -160,18 +215,40 @@ const CheckoutProducts = () => {
                                     </div>
                                 </div>
                                 <div className={"row justify-content-center mt-2"}>
-                                    <label htmlFor={"supplier"}
-                                           className="col-form-label col-md-2 label-right pr-3 pl-3">Size:
-                                    </label>
-                                    <div className={"col-md-4"}>
-                                        <select className={"form-control"} id={"supplier"} name={"supplier"}>
-                                            <option>-- Select Supplier--</option>
-                                            {suppliers.map((data) => {
-                                                return (
-                                                    <option value={data.code}>{data.supplier_name}</option>
-                                                )
-                                            })}
-                                        </select>
+                                    <div className={"col-md-12"} hidden={hidden.clothes}>
+                                        <div className={"row justify-content-center"}>
+                                            <label htmlFor={"supplier"}
+                                                   className="col-form-label col-md-2 label-right pr-3 pl-3">Supplier:
+                                            </label>
+                                            <div className={"col-md-4"}>
+                                                <select className={"form-control"} id={"supplier"} name={"supplier"}>
+                                                    <option>-- Select Clothes Supplier--</option>
+                                                    {suppliers.map((data) => {
+                                                        return (
+                                                            <option value={data.code}>{data.supplier_name}</option>
+                                                        )
+                                                    })}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className={"col-md-12"} hidden={hidden.food}>
+                                        <div className={"row justify-content-center"}>
+                                            <label htmlFor={"supplier"}
+                                                   className="col-form-label col-md-2 label-right pr-3 pl-3">Supplier:
+                                            </label>
+                                            <div className={"col-md-4"}>
+                                                <select className={"form-control"} id={"supplier"} name={"supplier"}>
+                                                    <option>-- Select Food Supplier--</option>
+                                                    {foodSuppliers.map((data) => {
+                                                        return (
+                                                            <option value={data.code}>{data.supplier_name}</option>
+                                                        )
+                                                    })}
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className={"row justify-content-center mt-2"}>
@@ -190,6 +267,7 @@ const CheckoutProducts = () => {
                                     <table className={"table "} id={"tableId"}>
                                         <thead>
                                         <tr>
+                                            <th>Department</th>
                                             <th>Product_Id</th>
                                             <th>Quantity</th>
                                             <th>Unit Price</th>
@@ -200,6 +278,10 @@ const CheckoutProducts = () => {
                                         {productIds.map((data) => {
                                             return (
                                                 <tr>
+                                                    <td className={"text-center"}>
+                                                        <input className={"form-control"} value={data.department}
+                                                               name={"department[]"}/>
+                                                    </td>
                                                     <td className={"text-center"}>
                                                         <input className={"form-control"} value={data.category}
                                                                name={"category[]"}/>

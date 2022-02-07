@@ -6,10 +6,9 @@ import Modal2 from "../../components/helpers/Modal2";
 const ProductCard = () => {
     const [category, setCategory] = useState([])
     const [sizesData, setSizesData] = useState([])
+    const [foodTypes, setFoodTypes] = useState([])
     const [suppliers, setSuppliers] = useState([])
-    const [hidden, setHidden] = useState({
-        card2: true,
-    });
+    const [foodSuppliers, setFoodSuppliers] = useState([])
     const [sizes, setSizes] = useState([])
     const [variantInfo, setVariantInfo] = useState()
     const [productIds, setProductIds] = useState([])
@@ -20,6 +19,9 @@ const ProductCard = () => {
         amount: 0.0,
 
     });
+    const [hidden, setHidden] = useState({
+        clothes: false, food: true,
+    });
 
     useEffect(() => {
         getData('fetch_departments').then((data) => {
@@ -28,8 +30,14 @@ const ProductCard = () => {
         getData('fetch_sizes').then((data) => {
             setSizesData(data)
         });
+        getData('fetch_food_types').then((data) => {
+            setFoodTypes(data)
+        });
         getData('fetch_suppliers').then((data) => {
             setSuppliers(data)
+        });
+        getData('fetch_food_suppliers').then((data) => {
+            setFoodSuppliers(data)
         });
     }, [])
 
@@ -75,6 +83,19 @@ const ProductCard = () => {
     //     //props.addToCart(props.product.id, variantInfo)
     // }
 
+    const selectedOption = () => {
+        const option = document.getElementById('category').value;
+        switch (option){
+            case '1':
+                setHidden({clothes: false, food: true})
+                break;
+            case '2':
+                setHidden({clothes: true, food: false})
+                break;
+            default:
+                break;
+        }
+    }
     const addToCart = (e) => {
         e.preventDefault();
         const frmData = new FormData(document.getElementById('stock_inventory_form'))
@@ -89,6 +110,10 @@ const ProductCard = () => {
                 const rowData = data.response.map((data) => {
                     return (
                         <>
+                            <td className={"text-center"}>
+                                <input className={"form-control"} value={data.department}
+                                       name={"department[]"}/>
+                            </td>
                             <td className={"text-center"}>
                                 <input className={"form-control"} value={data.category}
                                        name={"category[]"}/>
@@ -152,7 +177,8 @@ const ProductCard = () => {
                                            className="col-form-label col-md-2 label-right pr-3 pl-3">Category:
                                     </label>
                                     <div className={"col-md-4"}>
-                                        <select className={"form-control"} id={"category"} name={"category"}>
+                                        <select className={"form-control"} id={"category"} name={"category"}
+                                        onChange={selectedOption}>
                                             <option>-- Select Category--</option>
                                             {category.map((data) => {
                                                 return (
@@ -163,19 +189,41 @@ const ProductCard = () => {
                                     </div>
                                 </div>
                                 <div className={"row justify-content-center mt-2"}>
-                                    <label htmlFor={"size"}
-                                           className="col-form-label col-md-2 label-right pr-3 pl-3">Size:
-                                    </label>
-                                    <div className={"col-md-4"}>
-                                        <select className={"form-control"} id={"size"} name={"size"}
-                                        >
-                                            <option>-- Select Size--</option>
-                                            {sizesData.map((data) => {
-                                                return (
-                                                    <option value={data.code}>{data.size}</option>
-                                                )
-                                            })}
-                                        </select>
+                                    <div className={"col-md-12"} hidden={hidden.clothes}>
+                                        <div className={"row justify-content-center"}>
+                                        <label htmlFor={"size"}
+                                               className="col-form-label col-md-2 label-right pr-3 pl-3">Size:
+                                        </label>
+                                        <div className={"col-md-4"}>
+                                            <select className={"form-control"} id={"size"} name={"size"}
+                                            >
+                                                <option>-- Select Cloth Size--</option>
+                                                {sizesData.map((data) => {
+                                                    return (
+                                                        <option value={data.code}>{data.size}</option>
+                                                    )
+                                                })}
+                                            </select>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div className={"col-md-12"} hidden={hidden.food}>
+                                        <div className={"row justify-content-center"}>
+                                        <label htmlFor={"type"}
+                                               className="col-form-label col-md-2 label-right pr-3 pl-3">Food:
+                                        </label>
+                                        <div className={"col-md-4"}>
+                                            <select className={"form-control"} id={"type"} name={"type"}
+                                            >
+                                                <option>-- Select Food Type --</option>
+                                                {foodTypes.map((data) => {
+                                                    return (
+                                                        <option value={data.code}>{data.type}</option>
+                                                    )
+                                                })}
+                                            </select>
+                                        </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className={"row justify-content-center mt-2"}>
@@ -188,18 +236,40 @@ const ProductCard = () => {
                                     </div>
                                 </div>
                                 <div className={"row justify-content-center mt-2"}>
-                                    <label htmlFor={"supplier"}
-                                           className="col-form-label col-md-2 label-right pr-3 pl-3">Size:
-                                    </label>
-                                    <div className={"col-md-4"}>
-                                        <select className={"form-control"} id={"supplier"} name={"supplier"}>
-                                            <option>-- Select Supplier--</option>
-                                            {suppliers.map((data) => {
-                                                return (
-                                                    <option value={data.code}>{data.supplier_name}</option>
-                                                )
-                                            })}
-                                        </select>
+                                    <div className={"col-md-12"} hidden={hidden.clothes}>
+                                        <div className={"row justify-content-center"}>
+                                            <label htmlFor={"supplier"}
+                                                   className="col-form-label col-md-2 label-right pr-3 pl-3">Supplier:
+                                            </label>
+                                            <div className={"col-md-4"}>
+                                                <select className={"form-control"} id={"supplier"} name={"supplier"}>
+                                                    <option>-- Select Clothes Supplier--</option>
+                                                    {suppliers.map((data) => {
+                                                        return (
+                                                            <option value={data.code}>{data.supplier_name}</option>
+                                                        )
+                                                    })}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className={"col-md-12"} hidden={hidden.food}>
+                                        <div className={"row justify-content-center"}>
+                                        <label htmlFor={"supplier"}
+                                               className="col-form-label col-md-2 label-right pr-3 pl-3">Supplier:
+                                        </label>
+                                        <div className={"col-md-4"}>
+                                            <select className={"form-control"} id={"supplier"} name={"supplier"}>
+                                                <option>-- Select Food Supplier--</option>
+                                                {foodSuppliers.map((data) => {
+                                                    return (
+                                                        <option value={data.code}>{data.supplier_name}</option>
+                                                    )
+                                                })}
+                                            </select>
+                                        </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className={"row justify-content-center mt-2"}>
@@ -218,6 +288,7 @@ const ProductCard = () => {
                                     <table className={"table "} id={"tableId"}>
                                         <thead>
                                         <tr>
+                                            <th>Dept</th>
                                             <th>Product_Id</th>
                                             <th>Quantity</th>
                                             <th>Unit Price</th>
@@ -228,6 +299,10 @@ const ProductCard = () => {
                                         {productIds.map((data) => {
                                             return (
                                                 <tr>
+                                                    <td className={"text-center"}>
+                                                        <input className={"form-control"} value={data.department}
+                                                               name={"department[]"}/>
+                                                    </td>
                                                     <td className={"text-center"}>
                                                         <input className={"form-control"} value={data.category}
                                                                name={"category[]"}/>
@@ -272,12 +347,11 @@ const ProductCard = () => {
                 modalIsOpen={modalIsOpen}
                 closeModal={closeModal}
                 body={
-                    <span className="h4 text-white font-weight-bold text-center">
-            {message}
-          </span>
-                }
-                background={
-                    message.length > 0 ? message[0].includes("Sorry") ? "#d9534f" : "#105878" : ""
+                    <div>
+                        <div className={"row justify-content-center"}>
+                            <p>{message}</p>
+                        </div>
+                    </div>
                 }
             />
         </div>

@@ -1,4 +1,4 @@
-const mainUrl = "https://stockman-b.herokuapp.com/api";
+const mainUrl = "https://stockman-b.herokuapp.com/";
 
 export const postData = async (formData, route) => {
   const url = mainUrl + route;

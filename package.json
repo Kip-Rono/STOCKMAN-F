@@ -17,7 +17,6 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "postinstall": "npm run prod",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -40,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": "14.7.0"
   }
 }

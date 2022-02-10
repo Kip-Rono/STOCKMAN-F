@@ -1,4 +1,4 @@
-const mainUrl = "https://stockman-b.herokuapp.com/";
+const mainUrl = "http://localhost:8000/api/";
 
 export const postData = async (formData, route) => {
   const url = mainUrl + route;

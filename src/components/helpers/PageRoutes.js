@@ -11,7 +11,7 @@ const PageRoutes = () => {
         <div className="container-fluid" id="content" style={{marginTop:"80px"}}>
             <Switch>
                 {/*Product card*/}
-                <Route path="/product-card exact">
+                <Route path="/product-card" exact>
                     <ProductCard />
                 </Route>
                 {/* Dashboard */}

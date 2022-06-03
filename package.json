@@ -18,7 +18,7 @@
   },
   "scripts": {
     "postinstall": "npm run prod",
-    "start": "react-scripts start",
+    "start": "node app.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -10,18 +10,19 @@ const PageRoutes = () => {
     return (
         <div className="container-fluid" id="content" style={{marginTop:"80px"}}>
             <Switch>
+                {/*Product card*/}
+                <Route path="/product-card" exact>
+                    <ProductCard />
+                </Route>
                 {/* Dashboard */}
-                <Route path="/" exact>
+                <Route path="/dashboard" exact>
                     <Dashboard/>
                 </Route>
                 {/* Reports*/}
-                <Route path="/report" exact>
+                <Route path="/report">
                     <Report/>
                 </Route>
-                {/*Product card*/}
-                <Route path="/product-card">
-                    <ProductCard />
-                </Route>
+
                 {/*Checkout Products*/}
                 <Route path="/checkout-products">
                     <CheckoutProducts/>

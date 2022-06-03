@@ -1,4 +1,4 @@
-const mainUrl = "https://stockman-b.herokuapp.com/";
+const mainUrl = "http://localhost:8000/api/";
 
 export const postData = async (formData, route) => {
   const url = mainUrl + route;
@@ -23,7 +23,7 @@ export const getData = async (route) => {
     const data = await response.json();
     return data;
   } else {
-    return "Error while accessing data. Please contact the admin...";
+    return "Error while accessing data. Please contact the StockMan admin...";
   }
 };
 
@@ -33,7 +33,7 @@ export const getOneData = async (route, path) => {
     const data = await response.json();
     return data;
   } else {
-    return "Error while accessing data. Please contact the admin...";
+    return "Error while accessing data. Please contact the StockMan admin...";
   }
 };
 

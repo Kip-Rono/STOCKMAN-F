@@ -78,7 +78,7 @@ export const Login = () => {
 
                             <div className="clearfix"></div>
                             <div>
-                                <p>©2021 All Rights Reserved.</p>
+                                <p>©2022 All Rights Reserved.</p>
                             </div>
                             <div className="separator"></div>
                         </form>

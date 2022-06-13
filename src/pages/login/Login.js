@@ -36,10 +36,11 @@ export const Login = () => {
     const saveDataInStorage = (data) => {
         data.map((dt) => {
             if (typeof Storage !== "undefined") {
-                localStorage.setItem("name", dt.name);
+                localStorage.setItem("stock_name", dt.name);
 
             } else {
                 setFeedback(["Sorry, could not save user data"]);
+                localStorage.setItem("stock_name", []);
             }
         });
     };

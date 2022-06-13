@@ -12,7 +12,7 @@ const PageRoutes = () => {
             <Switch>
 
                 {/* Login */}
-                <Route path={"/"} exact>
+                <Route path={"/login"} exact>
                     <Login/>
 
                 </Route>
@@ -21,7 +21,7 @@ const PageRoutes = () => {
                     <ProductCard />
                 </Route>
                 {/* Dashboard */}
-                <Route path="/dashboard" exact>
+                <Route path="/" exact>
                     <Dashboard/>
                 </Route>
                 {/* Reports*/}

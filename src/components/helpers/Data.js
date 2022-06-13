@@ -1,5 +1,5 @@
-const mainUrl = "https://stockman-b.herokuapp.com/api/";
-//const mainUrl = "localhost:8000/api";
+//const mainUrl = "https://stockman-b.herokuapp.com/api/";
+const mainUrl = "http://127.0.0.1:8000/api/";
 
 export const postData = async (formData, route) => {
   const url = mainUrl + route;

@@ -5,6 +5,7 @@ export const postData = async (formData, route) => {
   const url = mainUrl + route;
   const options = {
     method: "POST",
+    dataType: 'JSON',
     body: formData,
   };
 

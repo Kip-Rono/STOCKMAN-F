@@ -10,8 +10,11 @@ const PageRoutes = () => {
     return (
         <div className="container-fluid" id="content" style={{marginTop:"80px"}}>
             <Switch>
-                <Route path="/" exact>
-                    <Login />
+
+                {/* Login */}
+                <Route path={"/"} exact>
+                    <Login/>
+
                 </Route>
                 {/*Product card*/}
                 <Route path="/product-card" exact>

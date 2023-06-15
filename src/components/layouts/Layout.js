@@ -57,9 +57,9 @@ const Layout = () => {
                                     </ul>
                                     <ul className="nav nav-treeview ml-3">
                                         <li className="nav-item">
-                                            <Link to="/checkout-products" className="nav-link">
+                                            <Link to="/remove-products" className="nav-link">
                                                 <i className="far fa-circle nav-icon"></i>
-                                                <p>Checkout Products</p>
+                                                <p>Remove Products</p>
                                             </Link>
                                         </li>
                                     </ul>

@@ -22,45 +22,45 @@ const Report = () => {
         <div>
             <div className="row">
                 <ReportCard
-                    dt={reportsData.purchase_amount ? reportsData.purchase_amount.toLocaleString() : ""}
-                    color="lightblue" name="P. ORDERS"
+                    dt={reportsData.purchase_amount ? reportsData.purchase_amount.toLocaleString() + ' /=' : ""}
+                    color="lightblue" name="PURCHASE ORDERS"
                     icon={<i className="fas fa-hand-holding"></i>}/>
                 <ReportCard
-                    dt={reportsData.sales ? reportsData.sales.toLocaleString() : ""}
+                    dt={reportsData.sales ? reportsData.sales.toLocaleString() + ' /=' : ""}
                     color="lightgreen" name="SALES" type={"number"}
                     icon={<i class="fas fa-money-bill"></i>}/>
                 <ReportCard
-                    dt={reportsData.profit ? reportsData.profit.toLocaleString() : ""}
+                    dt={reportsData.profit ? reportsData.profit.toLocaleString() + ' /=' : ""}
                     color="lightgrey" name="PROFIT"
                     icon={<i class="fas fa-hand-holding-usd "></i>}/>
             </div>
             {/*food*/}
             <div className="row">
                 <ReportCard
-                    dt={reportsData.clothes_purchase_amount ? reportsData.clothes_purchase_amount.toLocaleString() : ""}
+                    dt={reportsData.clothes_purchase_amount ? reportsData.clothes_purchase_amount.toLocaleString() + ' /=' : ""}
                     color="lightblue" name="CLOTHE P. ORDERS"
                     icon={<i className="fas fa-hand-holding"></i>}/>
                 <ReportCard
-                    dt={reportsData.clothes_sales ? reportsData.clothes_sales.toLocaleString() : ""}
+                    dt={reportsData.clothes_sales ? reportsData.clothes_sales.toLocaleString() + ' /=' : ""}
                     color="lightgreen" name="CLOTHE SALES" type={"number"}
                     icon={<i className="fas fa-money-bill"></i>}/>
                 <ReportCard
-                    dt={reportsData.clothes_profit ? reportsData.clothes_profit.toLocaleString() : ""}
+                    dt={reportsData.clothes_profit ? reportsData.clothes_profit.toLocaleString() + ' /=' : ""}
                     color="lightgrey" name=" CLOTHE PROFIT"
                     icon={<i className="fas fa-hand-holding-usd "></i>}/>
             </div>
             {/*food*/}
             <div className="row">
                 <ReportCard
-                    dt={reportsData.food_purchase_amount ? reportsData.food_purchase_amount.toLocaleString() : ""}
+                    dt={reportsData.food_purchase_amount ? reportsData.food_purchase_amount.toLocaleString() + ' /=' : ""}
                     color="lightblue" name="FOOD P. ORDERS"
                     icon={<i className="fas fa-hand-holding"></i>}/>
                 <ReportCard
-                    dt={reportsData.food_sales ? reportsData.food_sales.toLocaleString() : ""}
+                    dt={reportsData.food_sales ? reportsData.food_sales.toLocaleString() + ' /=' : ""}
                     color="lightgreen" name="FOOD SALES" type={"number"}
                     icon={<i className="fas fa-money-bill"></i>}/>
                 <ReportCard
-                    dt={reportsData.food_profit ? reportsData.food_profit.toLocaleString() : ""}
+                    dt={reportsData.food_profit ? reportsData.food_profit.toLocaleString() + ' /=' : ""}
                     color="lightgrey" name="FOOD PROFIT"
                     icon={<i className="fas fa-hand-holding-usd "></i>}/>
             </div>
@@ -78,7 +78,7 @@ const Report = () => {
                     color="lightgreen" name="USER(s)"
                     icon={<i className="fas fa-users"></i>}/>
             </div>
-            <div className={"row"}>
+            <div className={"row mb-5"}>
                 <label htmlFor={"date"} className={"col-form-label col-md-1 label-right"}>On: </label>
                 <input type={"date"} name={"date"} id={"date"} maxLength={"4"}
                        max={"9999-12-31"} className={"form-control col-md-2 m-0"}/>

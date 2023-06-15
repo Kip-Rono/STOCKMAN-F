@@ -139,6 +139,7 @@ const CheckoutProducts = () => {
     }
     const closeModal = () => {
         setModalIsOpen(false);
+        window.location.reload();
     };
     return (
         <div>

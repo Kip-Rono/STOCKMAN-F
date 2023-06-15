@@ -30,7 +30,7 @@ const PageRoutes = () => {
                 </Route>
 
                 {/*Checkout Products*/}
-                <Route path="/checkout-products">
+                <Route path="/remove-products">
                     <CheckoutProducts/>
                 </Route>
             </Switch>

@@ -159,6 +159,8 @@ const ProductCard = () => {
     }
     const closeModal = () => {
         setModalIsOpen(false);
+        //refresh page
+        window.location.reload();
     };
 
     return (
@@ -289,7 +291,7 @@ const ProductCard = () => {
                                         <thead>
                                         <tr>
                                             <th>Dept</th>
-                                            <th>Product_Id</th>
+                                            <th>Product Id</th>
                                             <th>Quantity</th>
                                             <th>Unit Price</th>
                                             <th>Amount</th>
@@ -347,11 +349,12 @@ const ProductCard = () => {
                 modalIsOpen={modalIsOpen}
                 closeModal={closeModal}
                 body={
-                    <div>
-                        <div className={"row justify-content-center"}>
-                            <p>{message}</p>
-                        </div>
-                    </div>
+                    <span className="h4 text-white font-weight-bold text-center">
+            {message}
+          </span>
+                }
+                background={
+                    message.length > 0 ? message[0].includes("Sorry") ? "#d9534f" : "#105878" : ""
                 }
             />
         </div>
